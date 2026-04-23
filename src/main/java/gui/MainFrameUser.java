@@ -1,21 +1,19 @@
-/*
+/* 
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package gui;
-
+import java.util.logging.Logger;
 /**
  *
- * @author LOQ
+ * @author HP
  */
-public class Beranda extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Beranda.class.getName());
+public class MainFrameUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Beranda
-     */
-    public Beranda() {
+    // Ini baris 13 yang benar, tanpa kata 'import' di tengahnya
+    private static final Logger logger = Logger.getLogger(MainFrameUser.class.getName());
+
+    public MainFrameUser() {
         initComponents();
     }
 
@@ -66,7 +64,7 @@ public class Beranda extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Beranda().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrameUser().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
