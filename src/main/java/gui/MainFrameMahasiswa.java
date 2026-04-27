@@ -6,16 +6,16 @@ package gui;
 
 /**
  *
- * @author LOQ
+ * @author HP
  */
-public class Beranda extends javax.swing.JFrame {
+public class MainFrameMahasiswa extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Beranda.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrameMahasiswa.class.getName());
 
     /**
-     * Creates new form Beranda
+     * Creates new form MainFrameMahasiswa
      */
-    public Beranda() {
+    public MainFrameMahasiswa() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class Beranda extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Beranda().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrameMahasiswa().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,14 +8,14 @@ package gui;
  *
  * @author HP
  */
-public class siswa extends javax.swing.JFrame {
+public class MainFrameAdmin extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(siswa.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrameAdmin.class.getName());
 
     /**
-     * Creates new form siswa
+     * Creates new form MainFrameAdmin
      */
-    public siswa() {
+    public MainFrameAdmin() {
         initComponents();
     }
 
@@ -66,7 +66,7 @@ public class siswa extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new siswa().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrameAdmin().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
