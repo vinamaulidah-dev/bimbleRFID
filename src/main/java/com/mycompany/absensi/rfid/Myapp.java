@@ -5,20 +5,15 @@
 
 package com.mycompany.absensi.rfid;
 
-// Impor class Penghuni dari package .object
-import com.mycompany.absensi.rfid.object.Siswa; 
+// Import ini penting agar Myapp bisa memanggil LoginForm yang ada di package gui
+import gui.LoginForm;
 
 public class Myapp {
 
     public static void main(String[] args) {
-        // Membuat objek baru dari class Penghuni
-        Siswa P = new Siswa();
-        
-        // Pengecekan tipe objek (instanceof)
-        if (P instanceof Siswa) {
-            System.out.println("Objek adalah bagian dari class Penghuni");
-        } else {
-            System.out.println("Tipe objek tidak dikenal");
-        }
+        // Memanggil LoginForm agar muncul saat pertama kali aplikasi dijalankan
+        java.awt.EventQueue.invokeLater(() -> {
+            new LoginForm().setVisible(true);
+        });
     }
 }
