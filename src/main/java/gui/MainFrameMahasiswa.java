@@ -4,6 +4,7 @@
  */
 package gui;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author HP
@@ -15,6 +16,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
 
     public MainFrameMahasiswa() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -26,32 +28,141 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnHome = new javax.swing.JButton();
+        btnAbsensi = new javax.swing.JButton();
+        btnReward = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
+        btnJadwal = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        mainContent = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("SELAMAT DATANG SISWA");
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(250, 250));
+        jPanel1.setLayout(null);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(264, Short.MAX_VALUE))
-        );
+        btnHome.setText("HOME");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHome);
+        btnHome.setBounds(70, 30, 110, 50);
+
+        btnAbsensi.setText("Absensi");
+        btnAbsensi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbsensiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAbsensi);
+        btnAbsensi.setBounds(50, 160, 150, 40);
+
+        btnReward.setText("Reward");
+        btnReward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRewardActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReward);
+        btnReward.setBounds(50, 280, 150, 40);
+
+        btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnProfile);
+        btnProfile.setBounds(50, 340, 150, 40);
+
+        btnJadwal.setText("Jadwal/ruangan");
+        jPanel1.add(btnJadwal);
+        btnJadwal.setBounds(50, 210, 150, 50);
+
+        btnLogout.setBackground(new java.awt.Color(255, 51, 51));
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout);
+        btnLogout.setBounds(80, 400, 100, 40);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
+
+        mainContent.setBackground(new java.awt.Color(204, 204, 255));
+        mainContent.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(mainContent, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+mainContent.removeAll();
+mainContent.add(new PanelHome(), java.awt.BorderLayout.CENTER);
+mainContent.revalidate();
+mainContent.repaint();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnAbsensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbsensiActionPerformed
+System.out.println("--- DEBUG: Tombol Absensi Diklik ---");
+    
+    mainContent.removeAll();
+    
+    // Gunakan full path package jika perlu untuk memastikan tidak salah panggil
+    gui.PanelAbsensi absen = new gui.PanelAbsensi();
+    
+    mainContent.add(absen, java.awt.BorderLayout.CENTER);
+    
+    mainContent.revalidate();
+    mainContent.repaint();
+    
+    System.out.println("--- DEBUG: Panel ditambahkan ke mainContent ---");
+    }//GEN-LAST:event_btnAbsensiActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+mainContent.removeAll();
+    // Memanggil file PanelProfil yang sudah kamu desain
+    mainContent.add(new PanelProfil(), java.awt.BorderLayout.CENTER); 
+    mainContent.revalidate();
+    mainContent.repaint();
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+int jawab = JOptionPane.showConfirmDialog(null, "Yakin ingin Logout?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+if (jawab == JOptionPane.YES_OPTION) {
+    // Membuka kembali form login
+    new LoginForm().setVisible(true); 
+    
+    // Menutup frame saat ini (MainFrameMahasiswa/Admin)
+    this.dispose(); 
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnRewardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRewardActionPerformed
+mainContent.removeAll();
+mainContent.add(new PanelRewardProfile(), java.awt.BorderLayout.CENTER);
+mainContent.revalidate();
+mainContent.repaint();
+    }//GEN-LAST:event_btnRewardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,6 +190,14 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnAbsensi;
+    private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnJadwal;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnReward;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel mainContent;
     // End of variables declaration//GEN-END:variables
 }
