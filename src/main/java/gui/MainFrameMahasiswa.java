@@ -27,7 +27,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -75,6 +74,11 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
         btnAbsensi.setBounds(50, 160, 150, 40);
 
         btnReward.setText("Reward");
+        btnReward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRewardActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReward);
         btnReward.setBounds(50, 280, 150, 40);
 
@@ -104,33 +108,41 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         mainContent.setBackground(new java.awt.Color(204, 204, 255));
-
-        javax.swing.GroupLayout mainContentLayout = new javax.swing.GroupLayout(mainContent);
-        mainContent.setLayout(mainContentLayout);
-        mainContentLayout.setHorizontalGroup(
-            mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
-        );
-        mainContentLayout.setVerticalGroup(
-            mainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
-        );
-
+        mainContent.setLayout(new java.awt.BorderLayout());
         getContentPane().add(mainContent, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
+mainContent.removeAll();
+mainContent.add(new PanelHome(), java.awt.BorderLayout.CENTER);
+mainContent.revalidate();
+mainContent.repaint();
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnAbsensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbsensiActionPerformed
-        // TODO add your handling code here:
+System.out.println("--- DEBUG: Tombol Absensi Diklik ---");
+    
+    mainContent.removeAll();
+    
+    // Gunakan full path package jika perlu untuk memastikan tidak salah panggil
+    gui.PanelAbsensi absen = new gui.PanelAbsensi();
+    
+    mainContent.add(absen, java.awt.BorderLayout.CENTER);
+    
+    mainContent.revalidate();
+    mainContent.repaint();
+    
+    System.out.println("--- DEBUG: Panel ditambahkan ke mainContent ---");
     }//GEN-LAST:event_btnAbsensiActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
-        // TODO add your handling code here:
+mainContent.removeAll();
+    // Memanggil file PanelProfil yang sudah kamu desain
+    mainContent.add(new PanelProfil(), java.awt.BorderLayout.CENTER); 
+    mainContent.revalidate();
+    mainContent.repaint();
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -144,6 +156,13 @@ if (jawab == JOptionPane.YES_OPTION) {
     this.dispose(); 
 }        // TODO add your handling code here:
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnRewardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRewardActionPerformed
+mainContent.removeAll();
+mainContent.add(new PanelRewardProfile(), java.awt.BorderLayout.CENTER);
+mainContent.revalidate();
+mainContent.repaint();
+    }//GEN-LAST:event_btnRewardActionPerformed
 
     /**
      * @param args the command line arguments
