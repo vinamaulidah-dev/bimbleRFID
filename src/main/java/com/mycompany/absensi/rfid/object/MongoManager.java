@@ -11,7 +11,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoManager {
     private static MongoClient mongoClient;
-    private static final String DATABASE_NAME = "bank_absensi";
+    private static final String DATABASE_NAME = "bimble_rfid";
 
     public static MongoDatabase getDatabase() {
         if (mongoClient == null) {

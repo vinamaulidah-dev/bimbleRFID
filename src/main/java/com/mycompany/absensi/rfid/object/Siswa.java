@@ -7,7 +7,7 @@ package com.mycompany.absensi.rfid.object;
 public class Siswa {
 
     private String uidRfid;
-    private String idKaryawan;
+    private String idSiswa;
     private String namaLengkap;
     private String departemen;
 
@@ -16,7 +16,7 @@ public class Siswa {
 
     public Siswa(String uidRfid, String idKaryawan, String namaLengkap, String departemen) {
         this.uidRfid = uidRfid;
-        this.idKaryawan = idKaryawan;
+        this.idSiswa = idKaryawan;
         this.namaLengkap = namaLengkap;
         this.departemen = departemen;
     }
@@ -27,7 +27,7 @@ public class Siswa {
     public String toString() {
         return "Karyawan{" + 
                 "uidRfid=" + uidRfid + 
-                ", idKaryawan=" + idKaryawan + 
+                ", idKaryawan=" + idSiswa + 
                 ", namaLengkap=" + namaLengkap + 
                 ", departemen=" + departemen + '}';
     }
@@ -41,11 +41,11 @@ public class Siswa {
     }
 
     public String getIdSiswa() {
-        return idKaryawan;
+        return idSiswa;
     }
 
     public void setIdSiswa(String idKaryawan) {
-        this.idKaryawan = idKaryawan;
+        this.idSiswa = idKaryawan;
     }
 
     public String getNamaLengkap() {
