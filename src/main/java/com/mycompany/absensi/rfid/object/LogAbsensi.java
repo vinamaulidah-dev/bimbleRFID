@@ -66,4 +66,13 @@ public class LogAbsensi {
     public void setStatus(String status) {
         this.status = status;
     }
+private String namaSiswa;
+
+public String getNamaSiswa() {
+    return namaSiswa;
+}
+
+public void setNamaSiswa(String namaSiswa) {
+    this.namaSiswa = namaSiswa;
+}
 }
