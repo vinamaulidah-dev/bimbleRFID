@@ -5,6 +5,7 @@
 package gui;
 
 import javax.swing.JOptionPane;
+import gui.AdminPage;
 
 /**
  *
@@ -169,11 +170,17 @@ String user = txtUsername.getText();
     String role = comboRole.getSelectedItem().toString();
 
     // Logika login sederhana (bisa kamu hubungkan ke database MongoDB/DAO nanti)
-    if (user.equals("admin") && pass.equals("123") && role.equals("Admin")) {
-        JOptionPane.showMessageDialog(null, "Login Admin Berhasil!");
-        new MainFrameAdmin().setVisible(true); // Membuka Frame Admin
-        this.dispose(); // Menutup form login
-    } 
+   if (user.equals("admin") && pass.equals("123") && role.equals("Admin")) {
+    JOptionPane.showMessageDialog(null, "Login Admin Berhasil!");
+    
+    java.awt.EventQueue.invokeLater(() -> {
+    AdminPage admin = new AdminPage();
+    admin.setVisible(true);
+    admin.setLocationRelativeTo(null);   // Biar muncul di tengah
+    });
+
+    this.dispose(); // Tutup form login
+}    
     else if (user.equals("mahasiswa") && pass.equals("123") && role.equals("Mahasiswa")) {
         JOptionPane.showMessageDialog(null, "Login Mahasiswa Berhasil!");
         new MainFrameMahasiswa().setVisible(true); // Membuka Frame Mahasiswa
