@@ -9,7 +9,7 @@ public class Siswa {
     private String uidRfid;
     private String idSiswa;
     private String namaLengkap;
-    private String departemen;
+    private String kelas;
 
     public Siswa() {
     }
@@ -18,18 +18,18 @@ public class Siswa {
         this.uidRfid = uidRfid;
         this.idSiswa = idKaryawan;
         this.namaLengkap = namaLengkap;
-        this.departemen = departemen;
+        this.kelas = kelas;
     }
 
     
 
     @Override
     public String toString() {
-        return "Karyawan{" + 
+        return "Siswa{" + 
                 "uidRfid=" + uidRfid + 
                 ", idKaryawan=" + idSiswa + 
                 ", namaLengkap=" + namaLengkap + 
-                ", departemen=" + departemen + '}';
+                ", departemen=" + kelas + '}';
     }
 
     public String getUidRfid() {
@@ -57,11 +57,11 @@ public class Siswa {
     }
 
     public String getDepartemen() {
-        return departemen;
+        return kelas;
     }
 
     public void setDepartemen(String departemen) {
-        this.departemen = departemen;
+        this.kelas = kelas;
     }
     
     

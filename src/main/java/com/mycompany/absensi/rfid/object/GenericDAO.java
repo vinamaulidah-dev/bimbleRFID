@@ -18,7 +18,7 @@ public class GenericDAO<T> implements BaseDAO<T> {
     @Override
     public void save(T entity) {
         dataList.add(entity);
-        // Baris di bawah ini menggunakan clazz dan collectionName
+        // Baris di bawah i  ni menggunakan clazz dan collectionName
         System.out.println("Menyimpan objek tipe: " + clazz.getSimpleName() + 
                            " ke koleksi: " + collectionName);
     }
