@@ -3,59 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package gui;
+import javax.swing.JOptionPane;
+import com.mycompany.absensi.rfid.object.MongoManager; // Sesuaikan package Anda
+import org.bson.Document;
 
-import com.mycompany.absensi.rfid.object.GenericDAO;
-import com.mycompany.absensi.rfid.object.LogAbsensi; // Pastikan ini mengarah ke folder .object
-import javax.swing.JPanel;
-import java.util.List;
 /**
  *
  * @author HP
  */
 public class PanelAbsensi extends javax.swing.JPanel {
+    private final MongoManager mongoManager;
 
-    
-GenericDAO<LogAbsensi> dao = new GenericDAO<>("log_absensi", LogAbsensi.class);
-
-// Fungsi untuk mencetak kartu oren
-public javax.swing.JPanel buatKartu(String nama, String id) {
-    // Membuat panel baru dengan layout 2 baris (Nama & ID)
-    javax.swing.JPanel p = new javax.swing.JPanel(new java.awt.GridLayout(2, 1, 5, 5));
-    
-    // Setting warna Luxury (Oranye Kecokelatan) & Ukuran
-    p.setBackground(new java.awt.Color(210, 140, 80)); 
-    p.setPreferredSize(new java.awt.Dimension(150, 80));
-    p.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-    // Label Nama Siswa
-    javax.swing.JLabel l1 = new javax.swing.JLabel(nama);
-    l1.setForeground(java.awt.Color.WHITE);
-    l1.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 14));
-
-    // Label ID Siswa
-    javax.swing.JLabel l2 = new javax.swing.JLabel("ID: " + id);
-    l2.setForeground(new java.awt.Color(240, 240, 240));
-    l2.setFont(new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 11));
-
-    p.add(l1);
-    p.add(l2);
-
-    return p;
-}
-public void refreshData() {
-    panelKontainer.removeAll(); 
-    List<LogAbsensi> list = dao.findAll(); 
-    for (LogAbsensi d : list) {
-        panelKontainer.add(buatKartu(d.getUidRfid(), d.getStatus())); 
+    /**
+     * Creates new form PanelAbsensi
+     */
+    public PanelAbsensi() {
+        initComponents();
+        mongoManager = new MongoManager(); // Inisialisasi koneksi MongoDB
+        txtInputUID.requestFocus(); // Agar kursor otomatis aktif untuk RFID
     }
-    panelKontainer.revalidate();
-    panelKontainer.repaint();
-} // Baris ini harus ada kurung tutupnya!
 
-public PanelAbsensi() {
-    initComponents();
-    refreshData();
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,96 +31,139 @@ public PanelAbsensi() {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelTombol = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        panelKontainer = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtInputUID = new javax.swing.JTextField();
+        btnAbsen = new javax.swing.JButton();
 
-        setLayout(new java.awt.BorderLayout());
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25)));
+        jPanel2.setPreferredSize(new java.awt.Dimension(300, 250));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("SISTEM ABSENSI");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Silakan Tempelkan Kartu atau Masukkan UID Manual");
+
+        txtInputUID.setBackground(new java.awt.Color(204, 204, 255));
+        txtInputUID.setText("Masukkan UID");
+        txtInputUID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtInputUIDActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setText("Refresh");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAbsen.setBackground(new java.awt.Color(0, 200, 81));
+        btnAbsen.setForeground(new java.awt.Color(255, 255, 255));
+        btnAbsen.setText("Absen Sekarang");
+        btnAbsen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAbsenActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(153, 153, 255));
-        jButton3.setText("Delete");
-
-        jButton4.setBackground(new java.awt.Color(204, 204, 0));
-        jButton4.setText("Edit");
-
-        panelKontainer.setBackground(new java.awt.Color(255, 153, 102));
-        panelKontainer.setPreferredSize(new java.awt.Dimension(1000, 800));
-        panelKontainer.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
-        jScrollPane1.setViewportView(panelKontainer);
-
-        javax.swing.GroupLayout panelTombolLayout = new javax.swing.GroupLayout(panelTombol);
-        panelTombol.setLayout(panelTombolLayout);
-        panelTombolLayout.setHorizontalGroup(
-            panelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTombolLayout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(jButton1)
-                .addGap(5, 5, 5)
-                .addComponent(jButton2)
-                .addGap(5, 5, 5)
-                .addComponent(jButton3)
-                .addGap(5, 5, 5)
-                .addComponent(jButton4)
-                .addGap(253, 253, 253))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTombolLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(btnAbsen))
         );
-        panelTombolLayout.setVerticalGroup(
-            panelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTombolLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(panelTombolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(52, 52, 52)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1)
+                .addGap(38, 38, 38)
+                .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnAbsen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        add(panelTombol, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 47;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(185, 164, 196, 168);
+        jPanel1.add(jPanel2, gridBagConstraints);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        refreshData();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnAbsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbsenActionPerformed
+        prosesAbsensi();
+    }//GEN-LAST:event_btnAbsenActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        refreshData();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void txtInputUIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputUIDActionPerformed
+        prosesAbsensi();
+    }//GEN-LAST:event_txtInputUIDActionPerformed
+// TAROH KODE prosesAbsensi DI SINI
+    private void prosesAbsensi() {
+        String uid = txtInputUID.getText().trim();
+        
+        if (uid.isEmpty() || uid.equals("Masukkan UID")) {
+            JOptionPane.showMessageDialog(this, "Silakan masukkan atau scan UID terlebih dahulu");
+            return;
+        }
 
+        try {
+            // Mencari siswa berdasarkan UID di koleksi MongoDB
+            // Pastikan method getCollectionSiswa() ada di MongoManager Anda
+            Document siswa = mongoManager.getCollectionSiswa().find(new Document("uid", uid)).first();
+
+            if (siswa != null) {
+                String nama = siswa.getString("nama");
+                
+                JOptionPane.showMessageDialog(this, "Berhasil Absen!\nSelamat Datang, " + nama, 
+                        "Sukses", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "UID Tidak Terdaftar!", 
+                        "Gagal", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan koneksi database: " + e.getMessage(), 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Reset input dan fokuskan kembali untuk absen berikutnya (RFID ready)
+        txtInputUID.setText("");
+        txtInputUID.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel panelKontainer;
-    private javax.swing.JPanel panelTombol;
+    private javax.swing.JButton btnAbsen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtInputUID;
     // End of variables declaration//GEN-END:variables
 }

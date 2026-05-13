@@ -5,6 +5,7 @@
 package gui;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -17,6 +18,8 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
     public MainFrameMahasiswa() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+    mainContent.add(new PanelHome()); // Ganti contentPanel jadi mainContent
+    mainContent.revalidate();
     }
 
     /**
@@ -124,17 +127,22 @@ mainContent.repaint();
     private void btnAbsensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbsensiActionPerformed
 System.out.println("--- DEBUG: Tombol Absensi Diklik ---");
     
+    // 1. Hapus semua komponen yang ada di mainContent
     mainContent.removeAll();
     
-    // Gunakan full path package jika perlu untuk memastikan tidak salah panggil
+    // 2. Buat instance baru dari PanelAbsensi
+    // Pastikan package 'gui' sudah sesuai dengan struktur folder Anda
     gui.PanelAbsensi absen = new gui.PanelAbsensi();
     
+    // 3. Tambahkan ke mainContent
+    // Menggunakan BorderLayout.CENTER adalah pilihan terbaik untuk UI yang responsif
     mainContent.add(absen, java.awt.BorderLayout.CENTER);
     
+    // 4. Sinkronisasi ulang layout dan tampilan
     mainContent.revalidate();
     mainContent.repaint();
     
-    System.out.println("--- DEBUG: Panel ditambahkan ke mainContent ---");
+    System.out.println("--- DEBUG: Panel Absensi berhasil dimuat ke mainContent ---");
     }//GEN-LAST:event_btnAbsensiActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed

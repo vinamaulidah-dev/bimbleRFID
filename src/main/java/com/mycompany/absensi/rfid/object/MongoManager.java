@@ -4,6 +4,8 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -13,6 +15,9 @@ public class MongoManager {
     private static MongoClient mongoClient;
     private static final String DATABASE_NAME = "bimble_rfid";
 
+    /**
+     * Mendapatkan koneksi ke database MongoDB dengan dukungan POJO.
+     */
     public static MongoDatabase getDatabase() {
         if (mongoClient == null) {
             try {
@@ -35,5 +40,13 @@ public class MongoManager {
             }
         }
         return mongoClient.getDatabase(DATABASE_NAME);
+    }
+
+    /**
+     * Method untuk mengambil koleksi siswa secara langsung.
+     * Digunakan oleh PanelAbsensi untuk mencari data berdasarkan UID.
+     */
+    public MongoCollection<Document> getCollectionSiswa() {
+        return getDatabase().getCollection("siswa");
     }
 }
