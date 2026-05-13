@@ -1,52 +1,59 @@
 package com.mycompany.absensi.rfid.object;
 
+import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.conversions.Bson;
 
-public class GenericDAO<T> implements BaseDAO<T> {
-    // TIGA BARIS INI WAJIB ADA AGAR TIDAK ERROR
-    private final String collectionName;
-    private final Class<T> clazz; 
-    private List<T> dataList = new ArrayList<>();
+/**
+ * GenericDAO yang mendukung MongoDB POJO agar sinkron dengan SiswaService.
+ * Pastikan MongoManager sudah menggunakan PojoCodecProvider.
+ */
+public class GenericDAO<T> {
+    private final MongoCollection<T> collection;
+    private final Class<T> clazz;
 
-    // CONSTRUCTOR INI JUGA WAJIB ADA
     public GenericDAO(String collectionName, Class<T> clazz) {
-        this.collectionName = collectionName;
         this.clazz = clazz;
+        // Mengambil koneksi database dari MongoManager yang sudah mendukung POJO
+        this.collection = MongoManager.getDatabase().getCollection(collectionName, clazz);
     }
 
-    @Override
+    /**
+     * Menyimpan data baru ke MongoDB.
+     * Mengatasi error "Not supported yet".
+     */
     public void save(T entity) {
-        dataList.add(entity);
-        // Baris di bawah i  ni menggunakan clazz dan collectionName
-        System.out.println("Menyimpan objek tipe: " + clazz.getSimpleName() + 
-                           " ke koleksi: " + collectionName);
+        collection.insertOne(entity);
     }
 
-    @Override
-    public void update(int index, T entity) {
-        if (index >= 0 && index < dataList.size()) {
-            dataList.set(index, entity);
-        }
+    /**
+     *
+     */
+    public void update(Bson filter, T entity) {
+        collection.replaceOne(filter, entity);
     }
 
-    @Override
-    public void delete(int index) {
-        if (index >= 0 && index < dataList.size()) {
-            dataList.remove(index);
-        }
+    /**
+     * Mencari banyak data berdasarkan filter.
+     * Digunakan untuk fitur pencarian real-time (txtCari).
+     */
+    public List<T> findMany(Bson filter) {
+        return collection.find(filter).into(new ArrayList<>());
     }
 
-    @Override
+    /**
+     *
+     */
     public List<T> findAll() {
-        return dataList;
+        return collection.find().into(new ArrayList<>());
     }
 
-    @Override
-    public T findByIndex(int index) {
-        if (index >= 0 && index < dataList.size()) {
-            return dataList.get(index);
-        }
-        return null;
+    /**
+     * Menghapus data berdasarkan filter.
+     * Digunakan oleh tombol Delete/Hapus pada kartu.
+     */
+    public void delete(Bson filter) {
+        collection.deleteOne(filter);
     }
 }

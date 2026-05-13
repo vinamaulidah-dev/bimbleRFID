@@ -4,36 +4,36 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import org.bson.codecs.configuration.CodecRegistries;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 public class MongoManager {
     private static MongoClient mongoClient;
-    private static final String DATABASE_NAME = "bank_absensi";
+    private static final String DATABASE_NAME = "bimble_rfid";
 
     public static MongoDatabase getDatabase() {
+        if (mongoClient == null) {
+            try {
+                // 1. Buat CodecRegistry untuk Pojo (Penerjemah Objek Siswa)
+                CodecRegistry pojoCodecRegistry = fromRegistries(
+                    MongoClientSettings.getDefaultCodecRegistry(),
+                    fromProviders(PojoCodecProvider.builder().automatic(true).build())
+                );
 
-            // 1. Konfigurasi CodecRegistry untuk pemetaan POJO otomatis (Standard Industry)
-            CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(
-                MongoClientSettings.getDefaultCodecRegistry(),
-                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
-            );
-            
-            // 2. Terapkan registry tersebut ke pengaturan MongoClient
-            MongoClientSettings settings = MongoClientSettings.builder()
-            // Ganti URI sesuai dengan koneksi database Anda
-            .applyConnectionString(new com.mongodb.ConnectionString("mongodb://localhost:27017")) 
-            .codecRegistry(pojoCodecRegistry) // Masukkan codec di sini!
-            .build();
-            
-            // 3. Buat MongoClient dan Database menggunakan pengaturan tersebut
-            mongoClient = MongoClients.create(settings);
-            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
-            return database; 
-    }   
+                // 2. Konfigurasi Client Settings dengan Codec tersebut
+                MongoClientSettings settings = MongoClientSettings.builder()
+                    .applyConnectionString(new com.mongodb.ConnectionString("mongodb://localhost:27017"))
+                    .codecRegistry(pojoCodecRegistry)
+                    .build();
+
+                mongoClient = MongoClients.create(settings);
+                System.out.println("Koneksi ke MongoDB berhasil dengan POJO Support!");
+            } catch (Exception e) {
+                System.err.println("Gagal koneksi ke MongoDB: " + e.getMessage());
+            }
+        }
+        return mongoClient.getDatabase(DATABASE_NAME);
+    }
 }
-
-
-
-
