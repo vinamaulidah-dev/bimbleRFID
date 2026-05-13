@@ -6,6 +6,8 @@ package gui;
 import javax.swing.JOptionPane;
 import com.mycompany.absensi.rfid.object.MongoManager; // Sesuaikan package Anda
 import org.bson.Document;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 /**
  *
@@ -39,13 +41,14 @@ public class PanelAbsensi extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtInputUID = new javax.swing.JTextField();
         btnAbsen = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25)));
-        jPanel2.setPreferredSize(new java.awt.Dimension(300, 250));
+        jPanel2.setPreferredSize(new java.awt.Dimension(360, 250));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("SISTEM ABSENSI");
@@ -54,7 +57,6 @@ public class PanelAbsensi extends javax.swing.JPanel {
         jLabel1.setText("Silakan Tempelkan Kartu atau Masukkan UID Manual");
 
         txtInputUID.setBackground(new java.awt.Color(204, 204, 255));
-        txtInputUID.setText("Masukkan UID");
         txtInputUID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInputUIDActionPerformed(evt);
@@ -62,6 +64,7 @@ public class PanelAbsensi extends javax.swing.JPanel {
         });
 
         btnAbsen.setBackground(new java.awt.Color(0, 200, 81));
+        btnAbsen.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAbsen.setForeground(new java.awt.Color(255, 255, 255));
         btnAbsen.setText("Absen Sekarang");
         btnAbsen.addActionListener(new java.awt.event.ActionListener() {
@@ -70,20 +73,28 @@ public class PanelAbsensi extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Masukkan UID");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLabel1)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnAbsen))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnAbsen)
+                                .addGap(62, 62, 62))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +104,9 @@ public class PanelAbsensi extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
-                .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInputUID, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(28, 28, 28)
                 .addComponent(btnAbsen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -101,6 +114,7 @@ public class PanelAbsensi extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = -12;
         gridBagConstraints.ipady = 47;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(185, 164, 196, 168);
@@ -127,41 +141,69 @@ public class PanelAbsensi extends javax.swing.JPanel {
     }//GEN-LAST:event_txtInputUIDActionPerformed
 // TAROH KODE prosesAbsensi DI SINI
     private void prosesAbsensi() {
-        String uid = txtInputUID.getText().trim();
-        
-        if (uid.isEmpty() || uid.equals("Masukkan UID")) {
-            JOptionPane.showMessageDialog(this, "Silakan masukkan atau scan UID terlebih dahulu");
-            return;
-        }
+    String uid = txtInputUID.getText().trim();
 
-        try {
-            // Mencari siswa berdasarkan UID di koleksi MongoDB
-            // Pastikan method getCollectionSiswa() ada di MongoManager Anda
-            Document siswa = mongoManager.getCollectionSiswa().find(new Document("uid", uid)).first();
-
-            if (siswa != null) {
-                String nama = siswa.getString("nama");
-                
-                JOptionPane.showMessageDialog(this, "Berhasil Absen!\nSelamat Datang, " + nama, 
-                        "Sukses", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "UID Tidak Terdaftar!", 
-                        "Gagal", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Terjadi kesalahan koneksi database: " + e.getMessage(), 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        // Reset input dan fokuskan kembali untuk absen berikutnya (RFID ready)
-        txtInputUID.setText("");
-        txtInputUID.requestFocus();
+    // 1. Validasi Input
+    if (uid.isEmpty() || uid.equals("Masukkan UID")) {
+        JOptionPane.showMessageDialog(this, "Silakan masukkan atau scan UID terlebih dahulu");
+        return;
     }
+
+    try {
+        /* 
+           MENGGUNAKAN CARA B: 
+           Memanggil method pembantu yang ada di instance mongoManager 
+        */
+
+        // 2. Cari data di koleksi SiswaRFID
+        var collectionSiswa = mongoManager.getCollectionSiswa();
+        org.bson.Document query = new org.bson.Document("uid", uid);
+        org.bson.Document siswa = collectionSiswa.find(query).first();
+
+        if (siswa != null) {
+            String namaSiswa = siswa.getString("nama");
+
+            // 3. Simpan data ke koleksi Absensilog
+            var collectionLog = mongoManager.getCollectionLog();
+            org.bson.Document logAbsen = new org.bson.Document()
+                    .append("uid", uid)
+                    .append("nama", namaSiswa)
+                    .append("waktu", new java.util.Date());
+
+            collectionLog.insertOne(logAbsen);
+
+            // 4. Notifikasi Sukses
+            JOptionPane.showMessageDialog(this, 
+                "Berhasil Absen!\nSelamat Datang, " + namaSiswa, 
+                "Sukses", 
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            // Reset UI
+            txtInputUID.setText("");
+            txtInputUID.requestFocus();
+            
+        } else {
+            // Jika UID tidak ditemukan (seperti error "42" tadi)
+            JOptionPane.showMessageDialog(this, 
+                "UID: " + uid + " Tidak Terdaftar!", 
+                "Gagal", 
+                JOptionPane.ERROR_MESSAGE);
+            
+            txtInputUID.setText("");
+            txtInputUID.requestFocus();
+        }
+
+    } catch (Exception e) {
+        // Menangani jika koneksi database terputus
+        JOptionPane.showMessageDialog(this, "Kesalahan Database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbsen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtInputUID;

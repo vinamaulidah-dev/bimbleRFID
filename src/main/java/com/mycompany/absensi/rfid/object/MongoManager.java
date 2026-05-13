@@ -15,19 +15,14 @@ public class MongoManager {
     private static MongoClient mongoClient;
     private static final String DATABASE_NAME = "bimble_rfid";
 
-    /**
-     * Mendapatkan koneksi ke database MongoDB dengan dukungan POJO.
-     */
     public static MongoDatabase getDatabase() {
         if (mongoClient == null) {
             try {
-                // 1. Buat CodecRegistry untuk Pojo (Penerjemah Objek Siswa)
                 CodecRegistry pojoCodecRegistry = fromRegistries(
                     MongoClientSettings.getDefaultCodecRegistry(),
                     fromProviders(PojoCodecProvider.builder().automatic(true).build())
                 );
 
-                // 2. Konfigurasi Client Settings dengan Codec tersebut
                 MongoClientSettings settings = MongoClientSettings.builder()
                     .applyConnectionString(new com.mongodb.ConnectionString("mongodb://localhost:27017"))
                     .codecRegistry(pojoCodecRegistry)
@@ -43,10 +38,16 @@ public class MongoManager {
     }
 
     /**
-     * Method untuk mengambil koleksi siswa secara langsung.
-     * Digunakan oleh PanelAbsensi untuk mencari data berdasarkan UID.
+     * Method Instance untuk mengambil koleksi SiswaRFID.
      */
     public MongoCollection<Document> getCollectionSiswa() {
-        return getDatabase().getCollection("siswa");
+        return getDatabase().getCollection("SiswaRFID");
+    }
+
+    /**
+     * Method Instance untuk mengambil koleksi Absensilog.
+     */
+    public MongoCollection<Document> getCollectionLog() {
+        return getDatabase().getCollection("Absensilog");
     }
 }
