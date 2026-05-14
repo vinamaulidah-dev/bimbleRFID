@@ -95,6 +95,11 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
         btnProfile.setBounds(50, 340, 150, 40);
 
         btnJadwal.setText("Jadwal/ruangan");
+        btnJadwal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJadwalActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnJadwal);
         btnJadwal.setBounds(50, 210, 150, 50);
 
@@ -171,6 +176,23 @@ mainContent.add(new PanelRewardProfile(), java.awt.BorderLayout.CENTER);
 mainContent.revalidate();
 mainContent.repaint();
     }//GEN-LAST:event_btnRewardActionPerformed
+
+    private void btnJadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJadwalActionPerformed
+// Menghapus panel lama yang ada di sebelah kanan
+    mainContent.removeAll();
+    
+    // Memanggil PanelKelolaJadwal yang baru saja kita buat (image_850442.png)
+    PanelKelolaJadwal pJadwal = new PanelKelolaJadwal();
+    
+    // Menaruh panel jadwal ke dalam area konten utama
+    mainContent.add(pJadwal);
+    
+    // Refresh tampilan agar muncul seketika
+    mainContent.repaint();
+    mainContent.revalidate();
+    
+    System.out.println("--- DEBUG: Panel Kelola Jadwal berhasil dimuat ke mainContent ---");
+    }//GEN-LAST:event_btnJadwalActionPerformed
 
     /**
      * @param args the command line arguments

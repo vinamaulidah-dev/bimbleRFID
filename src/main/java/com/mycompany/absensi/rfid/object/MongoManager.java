@@ -11,6 +11,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
+
 public class MongoManager {
     private static MongoClient mongoClient;
     private static final String DATABASE_NAME = "bimble_rfid";
@@ -50,4 +51,7 @@ public class MongoManager {
     public MongoCollection<Document> getCollectionLog() {
         return getDatabase().getCollection("Absensilog");
     }
+    public MongoCollection<Document> getCollectionJadwal() {
+    return getDatabase().getCollection("JadwalPelajaran");
+}
 }

@@ -3,18 +3,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package gui;
+import com.mycompany.absensi.rfid.object.MongoManager;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author HP
  */
 public class PanelKelolaJadwal extends javax.swing.JPanel {
+// Tambahkan dua baris ini di sini
+    private final MongoManager mongoManager;
+    private final DefaultTableModel tableModel;
 
-    /**
-     * Creates new form PanelKelolaJadwal
-     */
     public PanelKelolaJadwal() {
         initComponents();
+        // Inisialisasi manager dan tableModel
+        mongoManager = new MongoManager();
+        tableModel = (DefaultTableModel) tableJadwal.getModel();
+        
+        // Bersihkan tabel agar tidak ada data dummy
+        tableModel.setRowCount(0);
+        
+        // Panggil fungsi untuk ambil data dari MongoDB
+        loadDataKeTabel();
     }
 
     /**
@@ -26,19 +40,376 @@ public class PanelKelolaJadwal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableJadwal = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnEdit = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtHari = new javax.swing.JTextField();
+        txtJam = new javax.swing.JTextField();
+        txtMapel = new javax.swing.JTextField();
+        txtRuangan = new javax.swing.JTextField();
+        btnSimpan = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        tableJadwal.setBackground(new java.awt.Color(204, 255, 204));
+        tableJadwal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Hari", "Jam", "Mata Pelajaran", "Ruangan"
+            }
+        ));
+        tableJadwal.setRowHeight(30);
+        tableJadwal.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        tableJadwal.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableJadwalMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableJadwal);
+
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnEdit.setBackground(new java.awt.Color(204, 255, 0));
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("HARI");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("JAM");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Mapel");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Ruangan");
+
+        txtHari.setToolTipText("contoh : senin");
+
+        txtJam.setToolTipText("contoh : 12.00");
+        txtJam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJamActionPerformed(evt);
+            }
+        });
+
+        txtMapel.setToolTipText("contoh :  IPS");
+
+        txtRuangan.setToolTipText("contoh : R belajar1");
+        txtRuangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRuanganActionPerformed(evt);
+            }
+        });
+
+        btnSimpan.setBackground(new java.awt.Color(46, 204, 113));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+
+        btnHapus.setBackground(new java.awt.Color(255, 102, 102));
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(255, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("TAMBAH JADWAL");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRuangan, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMapel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtJam, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHari, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtHari, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtJam, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtMapel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtRuangan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(767, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        int row = tableJadwal.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris di tabel yang ingin dihapus!");
+            return;
+        }
 
+        String mapel = tableModel.getValueAt(row, 2).toString();
+        int konfirmasi = JOptionPane.showConfirmDialog(this, "Hapus jadwal " + mapel + "?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            try {
+                mongoManager.getCollectionJadwal().deleteOne(new Document("mapel", mapel));
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus!");
+                loadDataKeTabel();
+                resetForm();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal Hapus: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        String hari = txtHari.getText().trim();
+        String jam = txtJam.getText().trim();
+        String mapel = txtMapel.getText().trim();
+        String ruangan = txtRuangan.getText().trim();
+
+        // Validasi input kosong
+        if (hari.isEmpty() || jam.isEmpty() || mapel.isEmpty() || ruangan.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi!");
+            return;
+        }
+
+        try {
+            // Cek apakah Mapel ini sudah ada di database
+            Document cekData = mongoManager.getCollectionJadwal().find(new Document("mapel", mapel)).first();
+
+            if (cekData != null) {
+                JOptionPane.showMessageDialog(this, "Jadwal " + mapel + " sudah ada!\nGunakan tombol EDIT jika ingin mengubah data yang sudah ada.");
+            } else {
+                // Proses Insert ke MongoDB
+                Document doc = new Document("hari", hari)
+                .append("jam", jam)
+                .append("mapel", mapel)
+                .append("ruangan", ruangan);
+
+                mongoManager.getCollectionJadwal().insertOne(doc);
+                JOptionPane.showMessageDialog(this, "Jadwal Baru Berhasil Disimpan!");
+
+                loadDataKeTabel(); // Refresh tabel
+                resetForm();       // Kosongkan form
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error Simpan: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void txtRuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRuanganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRuanganActionPerformed
+
+    private void txtJamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJamActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        int row = tableJadwal.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris di tabel yang ingin diedit!");
+            return;
+        }
+
+        // Ambil Mapel asli dari tabel sebagai ID untuk mencari data di MongoDB
+        String mapelLama = tableModel.getValueAt(row, 2).toString();
+
+        try {
+            Document filter = new Document("mapel", mapelLama);
+            Document dataBaru = new Document("hari", txtHari.getText())
+            .append("jam", txtJam.getText())
+            .append("mapel", txtMapel.getText())
+            .append("ruangan", txtRuangan.getText());
+
+            // Update data di MongoDB
+            mongoManager.getCollectionJadwal().replaceOne(filter, dataBaru);
+
+            JOptionPane.showMessageDialog(this, "Perubahan Berhasil Diperbarui!");
+            loadDataKeTabel();
+            resetForm();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Update: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tableJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableJadwalMouseClicked
+        int row = tableJadwal.getSelectedRow();
+
+        // Memindahkan data dari tabel kembali ke form input
+        txtHari.setText(tableModel.getValueAt(row, 0).toString());
+        txtJam.setText(tableModel.getValueAt(row, 1).toString());
+        txtMapel.setText(tableModel.getValueAt(row, 2).toString());
+        txtRuangan.setText(tableModel.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tableJadwalMouseClicked
+private void loadDataKeTabel() {
+        tableModel.setRowCount(0); 
+        try {
+            // Mengambil koleksi JadwalPelajaran dari MongoManager
+            MongoCollection<Document> collection = mongoManager.getCollectionJadwal();
+            for (Document doc : collection.find()) {
+                tableModel.addRow(new Object[]{
+                    doc.getString("hari"),
+                    doc.getString("jam"),
+                    doc.getString("mapel"),
+                    doc.getString("ruangan")
+                });
+            }
+        } catch (Exception e) {
+            System.err.println("Gagal memuat data: " + e.getMessage());
+        }
+    }
+
+    private void resetForm() {
+        txtHari.setText("");
+        txtJam.setText("");
+        txtMapel.setText("");
+        txtRuangan.setText("");
+        tableJadwal.clearSelection();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tableJadwal;
+    private javax.swing.JTextField txtHari;
+    private javax.swing.JTextField txtJam;
+    private javax.swing.JTextField txtMapel;
+    private javax.swing.JTextField txtRuangan;
     // End of variables declaration//GEN-END:variables
 }
