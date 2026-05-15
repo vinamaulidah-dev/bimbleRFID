@@ -39,6 +39,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         btnJadwal = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        btnKelolaSiswa = new javax.swing.JButton();
         mainContent = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -56,7 +57,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 250));
-        jPanel1.setLayout(null);
 
         btnHome.setText("HOME");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -64,8 +64,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnHomeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHome);
-        btnHome.setBounds(70, 30, 110, 50);
 
         btnAbsensi.setText("Absensi");
         btnAbsensi.addActionListener(new java.awt.event.ActionListener() {
@@ -73,8 +71,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnAbsensiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAbsensi);
-        btnAbsensi.setBounds(50, 160, 150, 40);
 
         btnReward.setText("Reward");
         btnReward.addActionListener(new java.awt.event.ActionListener() {
@@ -82,8 +78,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnRewardActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReward);
-        btnReward.setBounds(50, 280, 150, 40);
 
         btnProfile.setText("Profile");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -91,8 +85,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnProfileActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProfile);
-        btnProfile.setBounds(50, 340, 150, 40);
 
         btnJadwal.setText("Jadwal/ruangan");
         btnJadwal.addActionListener(new java.awt.event.ActionListener() {
@@ -100,8 +92,6 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnJadwalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnJadwal);
-        btnJadwal.setBounds(50, 210, 150, 50);
 
         btnLogout.setBackground(new java.awt.Color(255, 51, 51));
         btnLogout.setText("LOGOUT");
@@ -110,8 +100,58 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
                 btnLogoutActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogout);
-        btnLogout.setBounds(80, 400, 100, 40);
+
+        btnKelolaSiswa.setText("Kelola Siswa");
+        btnKelolaSiswa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKelolaSiswaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnAbsensi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnReward, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnKelolaSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(btnAbsensi, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnReward, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnKelolaSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
@@ -194,6 +234,23 @@ mainContent.repaint();
     System.out.println("--- DEBUG: Panel Kelola Jadwal berhasil dimuat ke mainContent ---");
     }//GEN-LAST:event_btnJadwalActionPerformed
 
+    private void btnKelolaSiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaSiswaActionPerformed
+// 1. Bersihkan konten yang ada di panel utama (mainContent)
+    mainContent.removeAll();
+    
+    // 2. Tambahkan PanelKelolaSiswa ke dalam mainContent
+    // Pastikan nama class-nya sudah benar sesuai file yang kamu buat
+    mainContent.add(new PanelKelolaSiswa());
+    
+    // 3. Refresh tampilan agar panel muncul
+    mainContent.repaint();
+    mainContent.revalidate();
+    
+    // Debugging (opsional) untuk memastikan tombol bekerja
+    System.out.println("--- DEBUG: Panel Kelola Siswa berhasil dimuat ke mainContent ---");
+
+    }//GEN-LAST:event_btnKelolaSiswaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,6 +280,7 @@ mainContent.repaint();
     private javax.swing.JButton btnAbsensi;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnJadwal;
+    private javax.swing.JButton btnKelolaSiswa;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnReward;

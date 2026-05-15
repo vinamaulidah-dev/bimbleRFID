@@ -38,20 +38,28 @@ public class MongoManager {
         return mongoClient.getDatabase(DATABASE_NAME);
     }
 
+    public static MongoCollection<Document> getCollection(String collectionName) {
+    return getDatabase().getCollection(collectionName);
+}
+
     /**
      * Method Instance untuk mengambil koleksi SiswaRFID.
      */
-    public MongoCollection<Document> getCollectionSiswa() {
-        return getDatabase().getCollection("SiswaRFID");
-    }
+    public static MongoCollection<Document> getCollectionSiswa() {
+    return getDatabase().getCollection("SiswaRFID");
+}
 
     /**
      * Method Instance untuk mengambil koleksi Absensilog.
      */
-    public MongoCollection<Document> getCollectionLog() {
-        return getDatabase().getCollection("Absensilog");
-    }
-    public MongoCollection<Document> getCollectionJadwal() {
+    public static MongoCollection<Document> getCollectionLog() {
+    return getDatabase().getCollection("Absensilog");
+}
+
+    public static MongoCollection<Document> getCollectionsiswa() {
+    return getDatabase().getCollection("siswa");
+}
+public static MongoCollection<Document> getCollectionJadwal() {
     return getDatabase().getCollection("JadwalPelajaran");
 }
 }
