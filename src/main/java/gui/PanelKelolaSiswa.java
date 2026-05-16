@@ -4,39 +4,19 @@
  */
 package gui;
 
-import com.mycompany.absensi.rfid.object.MongoManager;
-import javax.swing.JOptionPane;
-import org.bson.Document;
-
 /**
  *
  * @author HP
  */
 public class PanelKelolaSiswa extends javax.swing.JPanel {
-    
 
-  
-    // Baris ini diletakkan di bawah nama Class
-private javax.swing.DefaultListModel<String> listModel = new javax.swing.DefaultListModel<>();
+    /**
+     * Creates new form PanelKelolaSiswa
+     */
     public PanelKelolaSiswa() {
-        initComponents(); // Inisialisasi komponen GUI
-        
-        // Pasang listModel ke jList1
-        jList1.setModel(listModel);
-        
-        // Panggil fungsi untuk ambil data dari MongoDB
-        loadData(); 
-        
-        // Jika setelah loadData() ternyata listModel masih kosong, baru tampilkan pesan "Belum ada data"
-        if (listModel.isEmpty()) {
-            listModel.addElement("<html><div style='text-align:center; color:gray; padding:20px;'>"
-                                + "<i>Belum ada data siswa.<br>Silahkan input data di form kiri.</i>"
-                                + "</div></html>");
-        }
-    
-  
-    }
-
+        initComponents();   // Bawaan NetBeans untuk load design
+        loadDataKeGrid();         
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,55 +28,57 @@ private javax.swing.DefaultListModel<String> listModel = new javax.swing.Default
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelKoleksi = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         txtNama = new javax.swing.JTextField();
         txtKelas = new javax.swing.JTextField();
         txtAlamat = new javax.swing.JTextField();
         txtRfid = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cbDepartemen = new javax.swing.JComboBox<>();
-        btnRefresh = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
-
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 1, 3, 1, new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setBackground(new java.awt.Color(204, 255, 204));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(40, 40));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(150, 150));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("DATA SISWA");
+        panelKoleksi.setBackground(new java.awt.Color(204, 204, 255));
+        panelKoleksi.setLayout(new java.awt.GridLayout(1, 0, 3, 0));
+        jScrollPane1.setViewportView(panelKoleksi);
+
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+
+        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("DATA SISWA");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel5)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(204, 255, 204));
         jButton1.setText("SIMPAN");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,174 +86,110 @@ private javax.swing.DefaultListModel<String> listModel = new javax.swing.Default
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("EDIT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("KELAS");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("HAPUS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("ALAMAT");
 
-        jLabel2.setText("NAMA");
+        jLabel4.setText("RFID");
 
-        jLabel3.setText("KELAS");
+        jLabel1.setText("NAMA");
 
-        jLabel4.setText("ALAMAT");
-
-        jLabel5.setText("ABSENSI RFID");
-
-        cbDepartemen.setBackground(new java.awt.Color(204, 255, 204));
-        cbDepartemen.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cbDepartemen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IPA", "IPS", "Matematika", "Bahasa Inggris" }));
-
-        btnRefresh.setText("REFRESH");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRfid, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtAlamat)
+                            .addComponent(txtKelas)
+                            .addComponent(txtNama))))
+                .addGap(47, 47, 47))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAlamat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtKelas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jLabel4)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(43, 43, 43))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbDepartemen, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(43, 43, 43)
-                .addComponent(cbDepartemen, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(21, 21, 21))
+                .addGap(69, 69, 69)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jList1);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("DAFTAR DATA SISWA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(528, 528, 528)
-                        .addComponent(jLabel6)))
-                .addContainerGap(579, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,168 +197,235 @@ private javax.swing.DefaultListModel<String> listModel = new javax.swing.Default
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  String rfidHapus = txtRfid.getText().trim(); // Pastikan tidak ada spasi kosong
-    
-    if (!rfidHapus.isEmpty()) {
-        try {
-            // Pastikan field di database namanya "uidRfid" sesuai di MongoDB Compass
-            org.bson.Document query = new org.bson.Document("uidRfid", rfidHapus);
-            MongoManager.getCollection("siswa").deleteOne(query);
-            
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!");
-            loadData();  // Refresh daftar agar data hilang
-            clearForm(); // Kosongkan form
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } else {
-        JOptionPane.showMessageDialog(null, "Pilih data atau isi RFID yang akan dihapus!");
-    }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-try {
-        String rfid = txtRfid.getText().trim();
-        
-        if (rfid.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Pilih data di daftar sebelah kanan dulu!");
-            return;
-        }
-
-        // Ambil data baru dari field input
-        String namaBaru = txtNama.getText();
-        String alamatBaru = txtAlamat.getText();
-        String deptBaru = cbDepartemen.getSelectedItem().toString();
-
-        // Kriteria: cari yang uidRfid-nya cocok
-        org.bson.Document filter = new org.bson.Document("uidRfid", rfid);
-        
-        // Data yang mau diubah
-        org.bson.Document update = new org.bson.Document("$set", 
-            new org.bson.Document("namaLengkap", namaBaru)
-                .append("departemen", deptBaru)
-                .append("alamat", alamatBaru));
-
-        // Eksekusi Update
-        MongoManager.getCollection("siswa").updateOne(filter, update);
-
-        JOptionPane.showMessageDialog(this, "Data berhasil diperbarui!");
-        loadData(); // Supaya list di kanan langsung berubah
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Gagal Edit: " + e.getMessage());
-    }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 try {
-    String nama = txtNama.getText();
-    // Ambil data dari Dropdown
-    String dept = cbDepartemen.getSelectedItem().toString(); 
-    String alamat = txtAlamat.getText();
-    String rfid = txtRfid.getText();
+            // 1. Ambil data dari input form kiri
+            String nama = txtNama.getText().trim();
+            String kelas = txtKelas.getText().trim();
+            String alamat = txtAlamat.getText().trim();
+            String rfid = txtRfid.getText().trim();
 
-    Document doc = new Document("namaLengkap", nama)
-            .append("departemen", dept)
-            .append("alamat", alamat)
-            .append("uidRfid", rfid);
-
-    // Sekarang getCollection("siswa") sudah static dan tipenya benar
-    MongoManager.getCollection("siswa").insertOne(doc);
-    
-    loadData(); // Refresh list
-    clearForm();
-    JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan!");
-} catch (Exception e) {
-    e.printStackTrace();
-}
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-String selectedValue = jList1.getSelectedValue();
-    
-    // Cegah error jika klik di area kosong atau pesan "Belum ada data"
-    if (selectedValue != null && selectedValue.contains("<b>")) {
-        try {
-            // 1. Ambil Nama (di antara <b> dan </b>)
-            String nama = selectedValue.split("<b>")[1].split("</b>")[0];
-            txtNama.setText(nama);
-            
-            // 2. Ambil RFID (di antara ID: dan </small>)
-            // Kita pakai ID sebagai kunci utama untuk Edit/Hapus
-            String rfid = selectedValue.split("ID: ")[1].split("</small>")[0].trim();
-            txtRfid.setText(rfid);
-            
-            // 3. Ambil data lengkap lainnya langsung dari MongoDB agar akurat
-            org.bson.Document doc = MongoManager.getCollection("siswa")
-                    .find(new org.bson.Document("uidRfid", rfid)).first();
-            
-            if (doc != null) {
-                txtAlamat.setText(doc.getString("alamat"));
-                // Set Dropdown sesuai data di DB
-                cbDepartemen.setSelectedItem(doc.getString("departemen"));
+            // Validasi input wajib diisi
+            if (nama.isEmpty() || kelas.isEmpty() || alamat.isEmpty() || rfid.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Semua data form wajib diisi!");
+                return;
             }
-            
+
+            // 2. Hubungkan ke koleksi 'siswa' di MongoDB
+            com.mongodb.client.MongoCollection<org.bson.Document> col = 
+                com.mycompany.absensi.rfid.object.MongoManager.getCollectionsiswa();
+
+            if (col != null) {
+                
+                // =======================================================================
+                // PERIKSA: Apakah form ini sedang dalam mode EDIT atau mode INPUT BARU?
+                // =======================================================================
+                if (txtRfid.isEditable() == false) {
+                    // A. JIKA RFID TIDAK BISA DIEDIT -> BERARTI LAGI MODE EDIT DATA LAMA!
+                    org.bson.Document queryCari = new org.bson.Document("uidRfid", rfid);
+                    
+                    org.bson.Document dataBaru = new org.bson.Document()
+                            .append("namalengkap", nama) // Sesuaikan key huruf kecil di MongoDB Compass
+                            .append("departemen", kelas)
+                            .append("alamat", alamat);
+                    
+                    org.bson.Document updateOperator = new org.bson.Document("$set", dataBaru);
+                    
+                    // Eksekusi Update Permanen
+                    col.updateOne(queryCari, updateOperator);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Perubahan data " + nama + " berhasil disimpan permanen!");
+                    
+                    // Buka kembali kunci kolom RFID agar bisa input data baru lagi nanti
+                    txtRfid.setEditable(true);
+                    
+                } else {
+                    // B. JIKA RFID MASIH BISA DIEDIT -> BERARTI INPUT DATA BARU!
+                    // Cek dulu ke database, apakah nomor RFID ini sudah terdaftar sebelumnya?
+                    org.bson.Document cekRfid = col.find(new org.bson.Document("uidRfid", rfid)).first();
+                    if (cekRfid != null) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Gagal! Nomor RFID ini sudah terdaftar atas nama: " + cekRfid.getString("namalengkap"));
+                        return;
+                    }
+                    
+                    // Jika belum ada, lakukan insert data baru
+                    org.bson.Document docBaru = new org.bson.Document("namalengkap", nama)
+                            .append("departemen", kelas)
+                            .append("alamat", alamat)
+                            .append("uidRfid", rfid);
+                    
+                    col.insertOne(docBaru);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Data siswa baru berhasil ditambahkan!");
+                }
+
+                // 3. Bersihkan kembali isi form input setelah simpan/edit selesai
+                txtNama.setText("");
+                txtKelas.setText("");
+                txtAlamat.setText("");
+                txtRfid.setText("");
+
+                // 4. REFRESH GRID UTAMA biar kartu-kartunya langsung ter-update seketika
+                loadDataKeGrid();
+            }
         } catch (Exception e) {
-            System.err.println("Error parsing data: " + e.getMessage());
+            System.err.println("Error pada Tombol Simpan: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, "Terjadi kesalahan sistem: " + e.getMessage());
         }
     }
-    }//GEN-LAST:event_jList1MouseClicked
+        public void loadDataKeGrid() {
+       // 1. Bersihkan panel abu-abu agar data tidak menumpuk saat di-refresh
+        panelKoleksi.removeAll(); 
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-loadData();   // Ambil data terbaru dari database
-    clearForm();  // Kosongkan semua kolom input (Nama, RFID, dll)
-    JOptionPane.showMessageDialog(this, "Form telah dikosongkan & Data diperbarui!");
-
-    }//GEN-LAST:event_btnRefreshActionPerformed
-private void loadData() {
-        listModel.clear(); // Bersihkan list dulu
         try {
-            // Mengambil data dari collection 'siswa'
-            com.mongodb.client.MongoCursor<org.bson.Document> cursor = MongoManager.getCollection("siswa").find().iterator();
-            while (cursor.hasNext()) {
-                org.bson.Document doc = cursor.next();
-                
-                // Format tampilan kotakan (pastikan nama field sesuai DB: namaLengkap, departemen, uidRfid)
-                String card = "<html><div style='width: 300px; padding: 10px; border-bottom: 1px solid #ccc;'>"
-                            + "  <b style='color: #2980b9;'>" + doc.getString("namaLengkap") + "</b><br>"
-                            + "  <small>Dept: " + doc.getString("departemen") + " | ID: " + doc.getString("uidRfid") + "</small>"
-                            + "</div></html>";
-                listModel.addElement(card);
+            // 2. Panggil langsung lewat Class karena method-nya static
+            com.mongodb.client.MongoCollection<org.bson.Document> col = com.mycompany.absensi.rfid.object.MongoManager.getCollectionsiswa();
+
+            if (col != null) {
+                // 3. Looping mengambil data dari MongoDB
+                for (org.bson.Document doc : col.find()) {
+                    // Panggil template kartu kecil yang sudah kamu buat
+                    ItemSiswa item = new ItemSiswa();
+
+                    // AMBIL KEYS SESUAI COMPASS (menggunakan huruf kecil semua/sesuai DB)
+                    String nama = doc.getString("namalengkap") != null ? doc.getString("namalengkap") : "-";
+                    String kelas = doc.getString("departemen") != null ? doc.getString("departemen") : "-";
+                    String alamat = doc.getString("alamat") != null ? doc.getString("alamat") : "-";
+                    String rfid = doc.getString("uidRfid") != null ? doc.getString("uidRfid") : "-";
+
+                    // 4. Set teks ke label template kartu kamu
+                    // SEPERTI INI FORMAT TERBARUNYA:
+item.lblNama.setText("<html><b>Nama:</b> " + nama + "</html>");
+item.lblDepartemen.setText("<html><b>Kelas:</b> " + kelas + "</html>");
+item.lblAlamat.setText("<html><b>Alamat:</b> " + alamat + "</html>");
+item.lblRfid.setText("<html><b>RFID:</b> " + rfid + "</html>");
+
+                    // =========================================================
+                    // 5. FUNGSI TOMBOL EDIT (Ketik data kartu ke form input utama)
+                    // =========================================================
+item.btnEdit.addActionListener(new java.awt.event.ActionListener() {
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        // 1. Melempar data asli kartu ke JTextField form kiri
+        txtNama.setText(nama);
+        txtKelas.setText(kelas);
+        txtAlamat.setText(alamat);
+        txtRfid.setText(rfid);
+
+        // 2. WAJIB DISET TRUE: Supaya field nama, kelas, dan alamat BISA diketik/diedit ulang
+        txtNama.setEditable(true);
+        txtKelas.setEditable(true);
+        txtAlamat.setEditable(true);
+        
+        // 3. WAJIB DISET FALSE: Hanya RFID yang dikunci agar tidak bisa diubah-ubah nilainya
+        txtRfid.setEditable(false); 
+        
+        System.out.println("Memilih data siswa: " + nama + " untuk diedit.");
+    }
+});
+
+// =========================================================================
+// 2. TOMBOL SIMPAN EDIT BARU (Untuk menyimpan hasil perubahan form ke DB)
+// =========================================================================
+item.btnSimpanEdit.addActionListener(new java.awt.event.ActionListener() {
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            // Ambil teks terbaru yang sedang diketik user di form kiri
+            String namaBaru = txtNama.getText().trim();
+            String kelasBaru = txtKelas.getText().trim();
+            String alamatBaru = txtAlamat.getText().trim();
+            
+            if (namaBaru.isEmpty() || kelasBaru.isEmpty() || alamatBaru.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Form input di kiri tidak boleh kosong saat menyimpan edit!");
+                return;
+            }
+            
+            // Lakukan update ke MongoDB berdasarkan rfid asli milik kartu ini
+            org.bson.Document queryCari = new org.bson.Document("uidRfid", rfid);
+            
+            org.bson.Document dataTerupdate = new org.bson.Document()
+                    .append("namalengkap", namaBaru)
+                    .append("departemen", kelasBaru)
+                    .append("alamat", alamatBaru);
+            
+            org.bson.Document updateOperator = new org.bson.Document("$set", dataTerupdate);
+            
+            col.updateOne(queryCari, updateOperator);
+            javax.swing.JOptionPane.showMessageDialog(null, "Perubahan data " + namaBaru + " berhasil disimpan ke database!");
+            
+            // Kembalikan form ke mode normal
+            txtRfid.setEditable(true);
+            txtNama.setText("");
+            txtKelas.setText("");
+            txtAlamat.setText("");
+            txtRfid.setText("");
+            
+            // Refresh Grid agar kartu langsung menampilkan nama yang baru
+            loadDataKeGrid();
+            
+        } catch (Exception e) {
+            System.err.println("Gagal simpan edit: " + e.getMessage());
+        }
+    }
+                    });
+
+                    // =========================================================
+                    // 6. FUNGSI TOMBOL HAPUS (Langsung hapus dari MongoDB)
+                    // =========================================================
+                    item.btnHapus.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            int konfirmasi = javax.swing.JOptionPane.showConfirmDialog(
+                                null, 
+                                "Apakah Anda yakin ingin menghapus data " + nama + "?", 
+                                "Konfirmasi Hapus", 
+                                javax.swing.JOptionPane.YES_NO_OPTION
+                            );
+
+                            if (konfirmasi == javax.swing.JOptionPane.YES_OPTION) {
+                                // Hapus dari database berdasarkan UID RFID yang unik
+                                org.bson.Document queryHapus = new org.bson.Document("uidRfid", rfid);
+                                col.deleteOne(queryHapus);
+
+                                javax.swing.JOptionPane.showMessageDialog(null, "Data " + nama + " berhasil dihapus!");
+
+                                // Refresh tampilan grid secara otomatis setelah menghapus
+                                loadDataKeGrid();
+                            }
+                        }
+                    });
+                    // =========================================================
+
+                    // Masukkan kartu ke panel grid utama
+                    panelKoleksi.add(item);
+                }
             }
         } catch (Exception e) {
-            System.err.println("Gagal Load Data: " + e.getMessage());
+            System.out.println("Gagal memuat data ke Grid: " + e.getMessage());
         }
-}
-private void clearForm() {
-    txtNama.setText("");
-    txtKelas.setText(""); // Kalau masih pakai txtKelas
-    txtAlamat.setText("");
-    txtRfid.setText("");
-    cbDepartemen.setSelectedIndex(0); // Balikkan dropdown ke pilihan pertama
-}
+
+        // 7. Gambar ulang komponen Swing agar langsung muncul di layar
+        panelKoleksi.revalidate();
+        panelKoleksi.repaint();
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRefresh;
-    private javax.swing.JComboBox<String> cbDepartemen;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel panelKoleksi;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtKelas;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtRfid;
     // End of variables declaration//GEN-END:variables
-
 }
