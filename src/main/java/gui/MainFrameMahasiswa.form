@@ -43,7 +43,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="0" type="rgb"/>
+          <Color blue="99" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[250, 250]"/>
@@ -122,6 +122,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnHome">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="HOME"/>
           </Properties>
           <Events>
@@ -130,6 +133,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAbsensi">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Absensi"/>
           </Properties>
           <Events>
@@ -138,6 +144,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnReward">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reward"/>
           </Properties>
           <Events>
@@ -146,6 +155,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProfile">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Profile"/>
           </Properties>
           <Events>
@@ -154,6 +166,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnJadwal">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Jadwal/ruangan"/>
           </Properties>
           <Events>
@@ -163,7 +178,7 @@
         <Component class="javax.swing.JButton" name="btnLogout">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="ff" type="rgb"/>
+              <Color blue="0" green="0" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="LOGOUT"/>
           </Properties>
@@ -173,6 +188,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnKelolaSiswa">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Kelola Siswa"/>
           </Properties>
           <Events>
@@ -181,6 +199,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnMenuRiwayat">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Riwayat absensi"/>
           </Properties>
           <Events>
@@ -192,7 +213,7 @@
     <Container class="javax.swing.JPanel" name="mainContent">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="cc" type="rgb"/>
+          <Color blue="d7" green="eb" red="9b" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>

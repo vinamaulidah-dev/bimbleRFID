@@ -43,7 +43,7 @@ public class PanelAbsensi extends javax.swing.JPanel {
         btnAbsen = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(155, 235, 215));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

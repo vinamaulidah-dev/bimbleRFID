@@ -57,9 +57,10 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 250));
 
+        btnHome.setBackground(new java.awt.Color(204, 204, 204));
         btnHome.setText("HOME");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +68,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnAbsensi.setBackground(new java.awt.Color(204, 204, 204));
         btnAbsensi.setText("Absensi");
         btnAbsensi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +76,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnReward.setBackground(new java.awt.Color(204, 204, 204));
         btnReward.setText("Reward");
         btnReward.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +84,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnProfile.setBackground(new java.awt.Color(204, 204, 204));
         btnProfile.setText("Profile");
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +92,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnJadwal.setBackground(new java.awt.Color(204, 204, 204));
         btnJadwal.setText("Jadwal/ruangan");
         btnJadwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +100,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
-        btnLogout.setBackground(new java.awt.Color(255, 51, 51));
+        btnLogout.setBackground(new java.awt.Color(204, 0, 0));
         btnLogout.setText("LOGOUT");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +108,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnKelolaSiswa.setBackground(new java.awt.Color(204, 204, 204));
         btnKelolaSiswa.setText("Kelola Siswa");
         btnKelolaSiswa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +116,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
             }
         });
 
+        btnMenuRiwayat.setBackground(new java.awt.Color(204, 204, 204));
         btnMenuRiwayat.setText("Riwayat absensi");
         btnMenuRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +178,7 @@ public class MainFrameMahasiswa extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
-        mainContent.setBackground(new java.awt.Color(204, 204, 255));
+        mainContent.setBackground(new java.awt.Color(155, 235, 215));
         mainContent.setLayout(new java.awt.BorderLayout());
         getContentPane().add(mainContent, java.awt.BorderLayout.CENTER);
 

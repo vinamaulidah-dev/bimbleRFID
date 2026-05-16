@@ -51,7 +51,7 @@ private MongoCollection<Document> globalCollection;
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(155, 235, 215));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -81,13 +81,15 @@ private MongoCollection<Document> globalCollection;
         tblRiwayat.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1)));
         tblRiwayat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                " ", " ", "", ""
+                " waktu absen", " jam kelas", "uid", "nama siswa", "Metode", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblRiwayat);
