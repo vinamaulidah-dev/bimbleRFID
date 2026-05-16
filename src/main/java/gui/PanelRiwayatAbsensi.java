@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
  *
  * @author HP
  */
+
 public class PanelRiwayatAbsensi extends javax.swing.JPanel {
     
     private DefaultTableModel tableModel;
@@ -45,6 +46,8 @@ private MongoCollection<Document> globalCollection;
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRiwayat = new javax.swing.JTable();
+        btnHapusPilihan = new javax.swing.JButton();
+        btnHapusSemua = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -52,9 +55,10 @@ private MongoCollection<Document> globalCollection;
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 204));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Log Absensi Hari Ini");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -88,6 +92,24 @@ private MongoCollection<Document> globalCollection;
         ));
         jScrollPane1.setViewportView(tblRiwayat);
 
+        btnHapusPilihan.setBackground(new java.awt.Color(255, 102, 102));
+        btnHapusPilihan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapusPilihan.setText("HAPUS DATA TERPILIH");
+        btnHapusPilihan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusPilihanActionPerformed(evt);
+            }
+        });
+
+        btnHapusSemua.setBackground(new java.awt.Color(204, 153, 0));
+        btnHapusSemua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapusSemua.setText("Hapus Semua Data");
+        btnHapusSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusSemuaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,18 +117,31 @@ private MongoCollection<Document> globalCollection;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnHapusPilihan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHapusSemua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnHapusPilihan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHapusSemua, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -124,6 +159,101 @@ private MongoCollection<Document> globalCollection;
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHapusPilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusPilihanActionPerformed
+    // 1. Cek baris mana yang sedang diklik oleh user pada tblRiwayat
+        int barisTerpilih = tblRiwayat.getSelectedRow();
+        
+        // 2. Validasi jika user belum memilih baris sama sekali
+        if (barisTerpilih == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Silakan klik/pilih salah satu baris data di tabel terlebih dahulu!", 
+                "Peringatan", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+        
+        // 3. Pop-up Notifikasi Konfirmasi (Yes atau No)
+        int konfirmasi = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "Apakah Anda yakin ingin menghapus data yang dipilih?", 
+            "Konfirmasi Hapus", 
+            javax.swing.JOptionPane.YES_NO_OPTION);
+            
+        // 4. Jika user menekan tombol YES
+        if (konfirmasi == javax.swing.JOptionPane.YES_OPTION) {
+            try {
+                // Ambil UID dari kolom indeks ke-2 (kolom UID) untuk menghapus data di MongoDB
+                String uidTerpilih = tableModel.getValueAt(barisTerpilih, 2).toString();
+                
+                // Hapus data dari MongoDB berdasarkan UID
+                if (globalCollection != null) {
+                    org.bson.Document query = new org.bson.Document("uid", uidTerpilih);
+                    globalCollection.deleteOne(query);
+                }
+                
+                // Hapus baris dari tampilan JTable
+                tableModel.removeRow(barisTerpilih);
+                
+                // Notifikasi sukses
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Data dengan UID " + uidTerpilih + " berhasil dihapus dari tabel dan database!", 
+                    "Berhasil", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Gagal menghapus data: " + e.getMessage(), 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    
+    }//GEN-LAST:event_btnHapusPilihanActionPerformed
+
+    private void btnHapusSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSemuaActionPerformed
+// 1. Validasi apakah tabel memang sudah kosong atau belum
+        if (tableModel.getRowCount() == 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Tabel sudah kosong, tidak ada data untuk dihapus!", 
+                "Peringatan", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // 2. Pop-up Notifikasi Peringatan Keras (Yes atau No)
+        int konfirmasi = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "Apakah Anda yakin ingin menghapus SELURUH data absensi hari ini?\nData di database MongoDB juga akan ikut terhapus.", 
+            "PERINGATAN KRITIS!", 
+            javax.swing.JOptionPane.YES_NO_OPTION, 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+            
+        // 3. Jika user menekan tombol YES
+        if (konfirmasi == javax.swing.JOptionPane.YES_OPTION) {
+            try {
+                // Hapus semua data di koleksi MongoDB
+                if (globalCollection != null) {
+                    org.bson.Document queryKosong = new org.bson.Document();
+                    globalCollection.deleteMany(queryKosong);
+                }
+                
+                // Mengosongkan seluruh isi baris tabel GUI seketika
+                tableModel.setRowCount(0);
+                
+                // Notifikasi sukses
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Semua data absensi di tabel dan database berhasil dibersihkan!", 
+                    "Berhasil", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Gagal membersihkan data: " + e.getMessage(), 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }
+  
+    }//GEN-LAST:event_btnHapusSemuaActionPerformed
 private void initTableStructure() {
         String[] kolom = {"Waktu Absen", "Jam Kelas", "UID", "Nama Siswa", "Metode", "Status"};
         tableModel = new DefaultTableModel(kolom, 0) {
@@ -185,6 +315,8 @@ private void initTableStructure() {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHapusPilihan;
+    private javax.swing.JButton btnHapusSemua;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
