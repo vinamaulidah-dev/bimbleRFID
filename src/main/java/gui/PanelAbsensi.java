@@ -94,7 +94,7 @@ public class PanelAbsensi extends javax.swing.JPanel {
                                 .addGap(62, 62, 62))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
+                        .addGap(68, 68, 68))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,62 +141,82 @@ public class PanelAbsensi extends javax.swing.JPanel {
     }//GEN-LAST:event_txtInputUIDActionPerformed
 // TAROH KODE prosesAbsensi DI SINI
     private void prosesAbsensi() {
-    String uid = txtInputUID.getText().trim();
+      String uid = txtInputUID.getText().trim();
 
-    // 1. Validasi Input
-    if (uid.isEmpty() || uid.equals("Masukkan UID")) {
-        JOptionPane.showMessageDialog(this, "Silakan masukkan atau scan UID terlebih dahulu");
-        return;
-    }
-
-    try {
-        /* 
-           MENGGUNAKAN CARA B: 
-           Memanggil method pembantu yang ada di instance mongoManager 
-        */
-
-        // 2. Cari data di koleksi SiswaRFID
-        var collectionSiswa = mongoManager.getCollectionSiswa();
-        org.bson.Document query = new org.bson.Document("uid", uid);
-        org.bson.Document siswa = collectionSiswa.find(query).first();
-
-        if (siswa != null) {
-            String namaSiswa = siswa.getString("nama");
-
-            // 3. Simpan data ke koleksi Absensilog
-            var collectionLog = mongoManager.getCollectionLog();
-            org.bson.Document logAbsen = new org.bson.Document()
-                    .append("uid", uid)
-                    .append("nama", namaSiswa)
-                    .append("waktu", new java.util.Date());
-
-            collectionLog.insertOne(logAbsen);
-
-            // 4. Notifikasi Sukses
-            JOptionPane.showMessageDialog(this, 
-                "Berhasil Absen!\nSelamat Datang, " + namaSiswa, 
-                "Sukses", 
-                JOptionPane.INFORMATION_MESSAGE);
-            
-            // Reset UI
-            txtInputUID.setText("");
-            txtInputUID.requestFocus();
-            
-        } else {
-            // Jika UID tidak ditemukan (seperti error "42" tadi)
-            JOptionPane.showMessageDialog(this, 
-                "UID: " + uid + " Tidak Terdaftar!", 
-                "Gagal", 
-                JOptionPane.ERROR_MESSAGE);
-            
-            txtInputUID.setText("");
-            txtInputUID.requestFocus();
+        // 1. Validasi Input Kosong
+        if (uid.isEmpty() || uid.equals("Masukkan UID")) {
+            JOptionPane.showMessageDialog(this, "Silakan masukkan atau scan UID terlebih dahulu");
+            return;
         }
 
-    } catch (Exception e) {
-        // Menangani jika koneksi database terputus
-        JOptionPane.showMessageDialog(this, "Kesalahan Database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        try {
+            var collectionSiswa = mongoManager.getCollectionSiswa();
+            org.bson.Document query = new org.bson.Document("uid", uid);
+            
+            // 2. Hitung jumlah dokumen dengan UID yang sama untuk cek bentrok
+            long jumlahData = collectionSiswa.countDocuments(query);
+
+            // JIKA DATA BENTROK (Ada lebih dari 1 siswa dengan UID yang sama)
+            if (jumlahData > 1) {
+                JOptionPane.showMessageDialog(this, 
+                    "Gagal Absen!\nTerjadi data bentrok (Double UID: " + uid + " digunakan oleh " + jumlahData + " siswa).\nSilakan perbaiki data di database terlebih dahulu!", 
+                    "Error Bentrok Data", 
+                    JOptionPane.ERROR_MESSAGE);
+                
+                // Reset UI tanpa memproses absensi
+                txtInputUID.setText("");
+                txtInputUID.requestFocus();
+                return; // Menghentikan proses di sini agar tidak masuk ke log absensi
+            }
+
+            // 3. Jika tidak bentrok, cari data siswanya
+            org.bson.Document siswa = collectionSiswa.find(query).first();
+
+            if (siswa != null) {
+                String namaSiswa = siswa.getString("nama");
+                
+                // Ambil status dari database. Jika null/kosong, default "Hadir"
+                String statusSiswa = siswa.getString("Status");
+                if (statusSiswa == null || statusSiswa.isEmpty()) {
+                    statusSiswa = "Hadir";
+                }
+
+                // 4. Simpan data ke koleksi Absensilog
+                var collectionLog = mongoManager.getCollectionLog();
+                org.bson.Document logAbsen = new org.bson.Document()
+                        .append("uid", uid)
+                        .append("nama", namaSiswa)
+                        .append("status", statusSiswa)
+                        .append("waktu", new java.util.Date());
+
+                collectionLog.insertOne(logAbsen);
+
+                // 5. Notifikasi Sukses
+                JOptionPane.showMessageDialog(this, 
+                    "Berhasil Absen!\n" +
+                    "Selamat Datang, " + namaSiswa + "\n" +
+                    "Status: " + statusSiswa, 
+                    "Sukses", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                
+                // Reset UI
+                txtInputUID.setText("");
+                txtInputUID.requestFocus();
+                
+            } else {
+                // Jika UID tidak ditemukan
+                JOptionPane.showMessageDialog(this, 
+                    "UID: " + uid + " Tidak Terdaftar!", 
+                    "Gagal", 
+                    JOptionPane.ERROR_MESSAGE);
+                
+                txtInputUID.setText("");
+                txtInputUID.requestFocus();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Kesalahan Database: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
