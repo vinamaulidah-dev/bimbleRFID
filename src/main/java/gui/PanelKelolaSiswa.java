@@ -30,7 +30,7 @@ public class PanelKelolaSiswa extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelKoleksi = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panelGridKartu = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -42,6 +42,8 @@ public class PanelKelolaSiswa extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnCari = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(155, 235, 215));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -54,8 +56,8 @@ public class PanelKelolaSiswa extends javax.swing.JPanel {
         panelKoleksi.setLayout(new java.awt.GridLayout(0, 3, 2, 2));
         jScrollPane1.setViewportView(panelKoleksi);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelGridKartu.setBackground(new java.awt.Color(255, 255, 255));
+        panelGridKartu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel3.setBackground(new java.awt.Color(226, 232, 240));
 
@@ -118,58 +120,58 @@ public class PanelKelolaSiswa extends javax.swing.JPanel {
 
         jLabel1.setText("NAMA");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelGridKartuLayout = new javax.swing.GroupLayout(panelGridKartu);
+        panelGridKartu.setLayout(panelGridKartuLayout);
+        panelGridKartuLayout.setHorizontalGroup(
+            panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGridKartuLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGridKartuLayout.createSequentialGroup()
+                        .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtKelas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRfid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGridKartuLayout.createSequentialGroup()
+                        .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGridKartuLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                 .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(panelGridKartuLayout.createSequentialGroup()
                                 .addGap(18, 46, Short.MAX_VALUE)
                                 .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGridKartuLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panelGridKartuLayout.setVerticalGroup(
+            panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGridKartuLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelGridKartuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -177,25 +179,45 @@ public class PanelKelolaSiswa extends javax.swing.JPanel {
                 .addGap(63, 63, 63))
         );
 
+        btnCari.setBackground(new java.awt.Color(204, 255, 153));
+        btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
+
+        txtSearch.setToolTipText("contoh : riski");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelGridKartu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCari)
+                .addGap(333, 333, 333))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelGridKartu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -447,8 +469,121 @@ item.btnSimpanEdit.addActionListener(new java.awt.event.ActionListener() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRfidActionPerformed
 
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        cariDataSiswa();
+    }//GEN-LAST:event_btnCariActionPerformed
+private void cariDataSiswa() {
+    // 1. Ambil teks dari kolom pencarian, hapus spasi, dan jadikan huruf kecil
+    String keyword = txtSearch.getText().trim().toLowerCase();
+    
+    // 2. Kosongkan panelKoleksi (tempat kartu berada) agar data lama tidak menumpuk
+    panelKoleksi.removeAll(); 
+    
+    try {
+        // 3. Ambil koneksi database MongoDB langsung lewat MongoManager bawaanmu
+        com.mongodb.client.MongoCollection<org.bson.Document> col = 
+            com.mycompany.absensi.rfid.object.MongoManager.getCollectionsiswa();
+
+        if (col != null) {
+            // 4. Lakukan looping data dari MongoDB
+            for (org.bson.Document doc : col.find()) {
+                
+                // Ambil data string dari document database
+                String nama = doc.getString("namalengkap") != null ? doc.getString("namalengkap") : "-";
+                String kelas = doc.getString("departemen") != null ? doc.getString("departemen") : "-";
+                String alamat = doc.getString("alamat") != null ? doc.getString("alamat") : "-";
+                String rfid = doc.getString("uidRfid") != null ? doc.getString("uidRfid") : "-";
+
+                // 5. Jalankan Filter logika pencarian
+                if (keyword.isEmpty() || 
+                    nama.toLowerCase().contains(keyword) || 
+                    rfid.contains(keyword) ||
+                    alamat.toLowerCase().contains(keyword)) {
+                    
+                    // Jika cocok dengan keyword, buat objek kartu barunya
+                    ItemSiswa item = new ItemSiswa();
+
+                    // Set teks label kartu persis seperti fungsi load data kamu
+                    item.lblNama.setText("<html><b>Nama:</b> " + nama + "</html>");
+                    item.lblDepartemen.setText("<html><b>Kelas:</b> " + kelas + "</html>");
+                    item.lblAlamat.setText("<html><b>Alamat:</b> " + alamat + "</html>");
+                    item.lblRfid.setText("<html><b>RFID:</b> " + rfid + "</html>");
+
+                    // Pasang fungsi tombol Edit, Simpan Edit, dan Hapus agar kartu hasil pencarian tetap bisa diklik
+                    item.btnEdit.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            txtNama.setText(nama);
+                            txtKelas.setText(kelas);
+                            txtAlamat.setText(alamat);
+                            txtRfid.setText(rfid);
+                            txtNama.setEditable(true);
+                            txtKelas.setEditable(true);
+                            txtAlamat.setEditable(true);
+                            txtRfid.setEditable(false); 
+                        }
+                    });
+
+                    item.btnSimpanEdit.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            try {
+                                String namaBaru = txtNama.getText().trim();
+                                String kelasBaru = txtKelas.getText().trim();
+                                String alamatBaru = txtAlamat.getText().trim();
+                                
+                                if (namaBaru.isEmpty() || kelasBaru.isEmpty() || alamatBaru.isEmpty()) {
+                                    javax.swing.JOptionPane.showMessageDialog(null, "Form input di kiri tidak boleh kosong saat menyimpan edit!");
+                                    return;
+                                }
+                                
+                                org.bson.Document queryCari = new org.bson.Document("uidRfid", rfid);
+                                org.bson.Document dataTerupdate = new org.bson.Document()
+                                        .append("namalengkap", namaBaru)
+                                        .append("departemen", kelasBaru)
+                                        .append("alamat", alamatBaru);
+                                
+                                col.updateOne(queryCari, new org.bson.Document("$set", dataTerupdate));
+                                javax.swing.JOptionPane.showMessageDialog(null, "Perubahan data " + namaBaru + " berhasil disimpan!");
+                                
+                                txtRfid.setEditable(true);
+                                txtNama.setText(""); txtKelas.setText(""); txtAlamat.setText(""); txtRfid.setText("");
+                                cariDataSiswa(); // Refresh hasil pencarian
+                            } catch (Exception e) {
+                                System.err.println("Gagal simpan edit: " + e.getMessage());
+                            }
+                        }
+                    });
+
+                    item.btnHapus.addActionListener(new java.awt.event.ActionListener() {
+                        @Override
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            int konfirmasi = javax.swing.JOptionPane.showConfirmDialog(null, 
+                                    "Apakah Anda yakin ingin menghapus data " + nama + "?", "Konfirmasi Hapus", javax.swing.JOptionPane.YES_NO_OPTION);
+                            if (konfirmasi == javax.swing.JOptionPane.YES_OPTION) {
+                                col.deleteOne(new org.bson.Document("uidRfid", rfid));
+                                javax.swing.JOptionPane.showMessageDialog(null, "Data " + nama + " berhasil dihapus!");
+                                cariDataSiswa(); // Refresh hasil pencarian
+                            }
+                        }
+                    });
+
+                    // Masukkan kartu yang lolos filter ke panelKoleksi
+                    panelKoleksi.add(item);
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Gagal menyaring data: " + e.getMessage());
+    }
+
+    // 6. Gambar ulang komponen panelKoleksi biar langsung berubah di layar monitor
+    panelKoleksi.revalidate();
+    panelKoleksi.repaint();
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCari;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -458,12 +593,17 @@ item.btnSimpanEdit.addActionListener(new java.awt.event.ActionListener() {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelGridKartu;
     private javax.swing.JPanel panelKoleksi;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtKelas;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtRfid;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void showData(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

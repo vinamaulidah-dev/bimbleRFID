@@ -29,4 +29,5 @@ public class Siswa {
 
     public String getDepartemen() { return departemen; }
     public void setDepartemen(String departemen) { this.departemen = departemen; }
+
 }
