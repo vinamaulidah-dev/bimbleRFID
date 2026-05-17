@@ -170,8 +170,8 @@ String user = txtUsername.getText();
     String role = comboRole.getSelectedItem().toString();
 
     // Logika login sederhana (bisa kamu hubungkan ke database MongoDB/DAO nanti)
-   if (user.equals("admin") && pass.equals("123") && role.equals("Admin")) {
-    JOptionPane.showMessageDialog(null, "Login Admin Berhasil!");
+   if (user.equals("mahasiswa") && pass.equals("123") && role.equals("Mahasiswa")) {
+    JOptionPane.showMessageDialog(null, "Login Mahasiswa Berhasil!");
     
     java.awt.EventQueue.invokeLater(() -> {
     AdminPage admin = new AdminPage();
@@ -181,8 +181,8 @@ String user = txtUsername.getText();
 
     this.dispose(); // Tutup form login
 }    
-    else if (user.equals("mahasiswa") && pass.equals("123") && role.equals("Mahasiswa")) {
-        JOptionPane.showMessageDialog(null, "Login Mahasiswa Berhasil!");
+    else if (user.equals("admin") && pass.equals("123") && role.equals("Admin")) {
+        JOptionPane.showMessageDialog(null, "Login Admin Berhasil!");
         new MainFrameMahasiswa().setVisible(true); // Membuka Frame Mahasiswa
         this.dispose();
     } 
